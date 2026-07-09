@@ -2,72 +2,65 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
 const links = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Subjects", href: "#subjects" },
-  { label: "Testimonials", href: "#testimonials" },
-  { label: "Contact", href: "#contact" },
+  { name: "Home", href: "#home" },
+  { name: "About", href: "#about" },
+  { name: "Subjects", href: "#subjects" },
+  { name: "Reviews", href: "#testimonials" },
+  { name: "Contact", href: "#contact" },
 ];
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 z-50 w-full border-b border-slate-200/60 bg-white/80 backdrop-blur-lg">
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
-        <a
-          href="#home"
-          className="text-2xl font-bold tracking-tight text-slate-900"
-        >
-          Online
-          <span className="text-blue-700"> Teaching</span>
+    <header className="fixed top-0 left-0 z-50 w-full border-b border-slate-200/70 bg-white/80 backdrop-blur-xl">
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
+        <a href="#home" className="text-2xl font-bold tracking-tight">
+          <span className="text-slate-900">Online</span>
+          <span className="text-blue-600"> Teaching</span>
         </a>
 
         <nav className="hidden items-center gap-8 md:flex">
           {links.map((link) => (
             <a
-              key={link.label}
+              key={link.name}
               href={link.href}
-              className="text-sm font-medium text-slate-600 transition hover:text-blue-700"
+              className="font-medium text-slate-600 transition hover:text-blue-600"
             >
-              {link.label}
+              {link.name}
             </a>
           ))}
 
           <a
             href="#contact"
-            className="rounded-full bg-blue-700 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-800"
+            className="rounded-full bg-blue-600 px-6 py-3 font-medium text-white transition hover:bg-blue-700"
           >
             Book Demo
           </a>
         </nav>
 
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="text-slate-800 md:hidden"
-        >
-          {isOpen ? <X size={28} /> : <Menu size={28} />}
+        <button onClick={() => setOpen(!open)} className="md:hidden">
+          {open ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
-      {isOpen && (
+      {open && (
         <div className="border-t border-slate-200 bg-white md:hidden">
           <div className="flex flex-col px-6 py-5">
             {links.map((link) => (
               <a
-                key={link.label}
+                key={link.name}
                 href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="py-3 text-slate-700 transition hover:text-blue-700"
+                onClick={() => setOpen(false)}
+                className="py-3"
               >
-                {link.label}
+                {link.name}
               </a>
             ))}
 
             <a
               href="#contact"
-              onClick={() => setIsOpen(false)}
-              className="mt-4 rounded-full bg-blue-700 py-3 text-center font-semibold text-white transition hover:bg-blue-800"
+              className="mt-4 rounded-full bg-blue-600 py-3 text-center font-semibold text-white"
             >
               Book Demo
             </a>
